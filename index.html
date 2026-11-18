@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111111">
+<title>LUXURY SHOP | Moda y estilo</title>
+<style>
+:root{--black:#111;--gold:#d9b875;--cream:#f7f5f0;--muted:#777}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#fff;color:#171717}
+header{background:var(--black);color:#fff;padding:18px 5%;display:flex;align-items:center;justify-content:space-between;gap:18px;position:sticky;top:0;z-index:5}
+.logo{font-weight:900;letter-spacing:3px;color:var(--gold);font-size:21px}.logo small{display:block;color:#fff;font-size:10px;letter-spacing:5px;text-align:center;margin-top:3px}
+nav{display:flex;gap:22px}nav a{color:#fff;text-decoration:none;font-size:13px}
+button,.btn{border:0;background:var(--gold);color:#111;padding:12px 17px;font-weight:700;cursor:pointer;border-radius:3px}
+.hero{background:linear-gradient(90deg,rgba(0,0,0,.82),rgba(0,0,0,.18)),url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1800&q=85') center/cover;min-height:420px;color:white;display:flex;align-items:center;padding:55px 8%}
+.hero div{max-width:520px}.eyebrow{color:var(--gold);letter-spacing:4px;font-size:12px;font-weight:bold}.hero h1{font-size:clamp(38px,7vw,70px);line-height:.98;margin:15px 0}.hero p{color:#eee;line-height:1.6;max-width:430px}
+section{padding:55px 6%}.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:25px}.section-head h2{margin:0;font-size:28px}.section-head p{margin:7px 0 0;color:var(--muted);font-size:14px}
+.categories{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.category{background:#eee;min-height:145px;display:flex;align-items:end;padding:20px;color:white;font-size:22px;font-weight:bold;letter-spacing:1px;background-size:cover;background-position:center;text-shadow:0 2px 7px #000}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.product{border:1px solid #eee;padding-bottom:15px}.product img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#f1f1f1}.product h3{font-size:15px;margin:12px 12px 5px}.product p{margin:0 12px 12px;color:#866b37;font-weight:bold}.product button{margin-left:12px;padding:10px 13px}
+.cart-panel{position:fixed;right:16px;bottom:16px;background:#111;color:#fff;padding:14px 18px;border-radius:5px;z-index:6;box-shadow:0 4px 20px #0004}
+.cart-panel button{margin-left:10px}.note{background:var(--cream);text-align:center;line-height:1.7}.note strong{color:#866b37}
+footer{background:#111;color:#ddd;text-align:center;padding:30px 15px;font-size:13px}footer b{color:var(--gold);letter-spacing:2px}
+@media(max-width:800px){nav{display:none}.products{grid-template-columns:repeat(2,1fr)}.categories{grid-template-columns:1fr}.category{min-height:110px}.hero{min-height:360px}}
+@media(max-width:420px){header{padding:14px 4%}.logo{font-size:17px}.products{gap:10px}.product h3{font-size:13px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">LUXURY<small>SHOP</small></div>
+  <nav><a href="#inicio">INICIO</a><a href="#categorias">CATEGORÍAS</a><a href="#productos">PRODUCTOS</a><a href="#contacto">CONTACTO</a></nav>
+  <button onclick="verCarrito()">MI CARRITO (<span id="cart-count">0</span>)</button>
+</header>
+
+<main>
+<section class="hero" id="inicio"><div>
+  <div class="eyebrow">FASHION · STYLE · QUALITY</div>
+  <h1>ELEVA<br>TU ESTILO.</h1>
+  <p>Descubre ropa, zapatillas y accesorios seleccionados para darle personalidad a cada outfit.</p>
+  <a class="btn" href="#productos" style="display:inline-block;text-decoration:none">VER COLECCIÓN</a>
+</div></section>
+
+<section id="categorias">
+  <div class="section-head"><div><h2>Compra por categoría</h2><p>Encuentra lo que va contigo.</p></div></div>
+  <div class="categories">
+    <a class="category" href="#productos" style="background-image:linear-gradient(#0002,#0008),url('https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=800&q=80')">ROPA</a>
+    <a class="category" href="#productos" style="background-image:linear-gradient(#0002,#0008),url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80')">ZAPATILLAS</a>
+    <a class="category" href="#productos" style="background-image:linear-gradient(#0002,#0008),url('https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=800&q=80')">ACCESORIOS</a>
+  </div>
+</section>
+
+<section id="productos">
+  <div class="section-head"><div><h2>Productos destacados</h2><p>Estos son productos de muestra. Cámbialos por los tuyos.</p></div></div>
+  <div class="products" id="product-list"></div>
+</section>
+<section class="note"><h2>¿Cómo comprar?</h2><p>Agrega tus productos al carrito y envía tu pedido por WhatsApp.<br><strong>Aceptamos transferencia y pago contra entrega</strong> (confirma disponibilidad y zonas de entrega).</p></section>
+</main>
+<footer id="contacto"><b>LUXURY SHOP</b><p>Tu estilo, tu mundo.</p><p>Pedidos y consultas por WhatsApp</p></footer>
+<div class="cart-panel">🛍️ <span id="cart-label">0 productos</span><button onclick="verCarrito()">Ver pedido</button></div>
+
+<script>
+// 1) CAMBIA ESTE NÚMERO por tu WhatsApp con código de país, solo números.
+// Ejemplo República Dominicana: 18095551234
+const WHATSAPP_NUMBER = "18090000000";
+
+// 2) Edita aquí tus productos: nombre, precio en RD$, foto y categoría.
+const products = [
+ {id:1,name:"Camiseta Urban",price:950,category:"Ropa",image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80"},
+ {id:2,name:"Zapatillas Classic",price:2850,category:"Zapatillas",image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80"},
+ {id:3,name:"Gafas de sol",price:750,category:"Accesorios",image:"https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=700&q=80"},
+ {id:4,name:"Sudadera Essential",price:1650,category:"Ropa",image:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=700&q=80"}
+];
+let cart=[];
+const money=n=>"RD$ "+n.toLocaleString("es-DO");
+function renderProducts(){
+ document.getElementById("product-list").innerHTML=products.map(p=>`
+ <article class="product"><img src="${p.image}" alt="${p.name}" onerror="this.src='https://placehold.co/600x600?text=LUXURY+SHOP'">
+ <h3>${p.name}</h3><p>${money(p.price)}</p><button onclick="addToCart(${p.id})">AGREGAR AL CARRITO</button></article>`).join("");
+}
+function addToCart(id){const p=products.find(x=>x.id===id);const item=cart.find(x=>x.id===id);if(item)item.qty++;else cart.push({...p,qty:1});updateCart()}
+function updateCart(){const count=cart.reduce((s,p)=>s+p.qty,0);document.getElementById("cart-count").textContent=count;document.getElementById("cart-label").textContent=count+" productos"}
+function verCarrito(){
+ if(!cart.length){alert("Tu carrito está vacío. Agrega algún producto primero.");return}
+ const lines=cart.map(p=>`${p.qty} x ${p.name} - ${money(p.price*p.qty)}`).join("\\n");
+ const total=cart.reduce((s,p)=>s+p.price*p.qty,0);
+ const extra=prompt("Tu pedido:\\n"+lines+"\\n\\nTOTAL: "+money(total)+"\\n\\nEscribe tu nombre y sector/dirección para completar el pedido:");
+ if(extra===null)return;
+ const msg=`Hola, LUXURY SHOP. Quiero realizar este pedido:\\n${lines}\\nTOTAL: ${money(total)}\\nNombre y dirección: ${extra}\\nMétodo de pago: por confirmar (transferencia o contra entrega).`;
+ if(WHATSAPP_NUMBER==="18090000000"){alert("Antes de recibir pedidos, reemplaza WHATSAPP_NUMBER en el código por tu número real.");return}
+ window.open("https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(msg),"_blank");
+}
+renderProducts();updateCart();
+</script>
+</body>
+</html>
